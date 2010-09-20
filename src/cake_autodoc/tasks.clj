@@ -1,10 +1,9 @@
 (ns cake-autodoc.tasks
-  (:use cake cake.core))
+  (:use cake cake.core autodoc.autodoc))
 
 (deftask autodoc []
-  "Generates autodoc documentation for your project based on keys defined in project.clj."
-  (bake
-   (:use autodoc.autodoc) []
-   (autodoc (merge
-             (select-keys *project* [:name :description :source-path :root])
-             (:autodoc *project*)))))
+  "Generates autodoc documentation for your project based on keys defined in project.clj." 
+  (autodoc
+   (merge
+    (select-keys *project* [:name :description :root])
+    (:autodoc *project*))))
